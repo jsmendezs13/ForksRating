@@ -230,7 +230,8 @@ const norm = s => String(s || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '
 const okSite = s => typeof s === 'string' && /^https:\/\/[a-z0-9.-]+$/.test(s) ? s : null;
 // a file of the restaurant's own site: at its top (chef-video.mp4, sliced-steak-plate.png), or a photo in the restaurant's own
 // folder (havana/photos/hv-camarones-coco.png, 19 Nov 2026: each restaurant's things in its own folder)
-const okFile = s => typeof s === 'string' && (/^[A-Za-z0-9_-]+\.(png|jpe?g|mp4|webm)$/.test(s) || /^[a-z0-9-]+\/photos\/[A-Za-z0-9_-]+\.(png|jpe?g)$/.test(s)) ? s : null;
+const okFile = s => typeof s === 'string' && (/^[A-Za-z0-9_-]+\.(png|jpe?g|mp4|webm)$/.test(s) || /^[a-z0-9-]+\/photos\/[A-Za-z0-9_-]+\.(png|jpe?g)$/.test(s)
+  || /^[a-z0-9-]+\/[A-Za-z0-9_-]+\.(mp4|webm)$/.test(s)) ? s : null;   // 20 Nov: or a video in the restaurant's own folder (havana/havana-hero.mp4)
 const money = n => { const v = Number(n); return Number.isFinite(v) ? '$' + (Number.isInteger(v) ? v : v.toFixed(2)) : ''; };
 
 // A photo from the restaurant's own site, in the size asked (its Vercel copy), the original if that fails.
